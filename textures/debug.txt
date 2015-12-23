@@ -1,0 +1,152 @@
+
+
+-------------
+  Separator  
+-------------
+
+Irrlicht log: Irrlicht Engine version 1.7.3
+Irrlicht log: Linux 3.2.0-4-amd64 #1 SMP Debian 3.2.60-1+deb7u3 x86_64
+Irrlicht log: Using renderer: OpenGL 2.1
+Irrlicht log: Gallium 0.4 on llvmpipe (LLVM 0x209): VMware, Inc.
+Irrlicht log: OpenGL driver version is 1.2 or better.
+Irrlicht log: GLSL version: 1.2
+20:37:30: ERROR[main]: ========== ERROR FROM LUA ===========
+20:37:30: ERROR[main]: Failed to load and run script from 
+20:37:30: ERROR[main]: /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:
+20:37:30: ERROR[main]: ...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: attempt to index global 'default' (a nil value)
+20:37:30: ERROR[main]: stack traceback:
+20:37:30: ERROR[main]: 	...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: in main chunk
+20:37:30: ERROR[main]: ======= END OF ERROR FROM LUA ========
+20:37:30: ERROR[main]: Server: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:37:30: ERROR[main]: ModError: ModError: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:37:56: ERROR[main]: ========== ERROR FROM LUA ===========
+20:37:56: ERROR[main]: Failed to load and run script from 
+20:37:56: ERROR[main]: /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:
+20:37:56: ERROR[main]: ...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: attempt to index global 'default' (a nil value)
+20:37:56: ERROR[main]: stack traceback:
+20:37:56: ERROR[main]: 	...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: in main chunk
+20:37:56: ERROR[main]: ======= END OF ERROR FROM LUA ========
+20:37:56: ERROR[main]: Server: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:37:56: ERROR[main]: ModError: ModError: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:38:40: ERROR[main]: ========== ERROR FROM LUA ===========
+20:38:40: ERROR[main]: Failed to load and run script from 
+20:38:40: ERROR[main]: /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:
+20:38:40: ERROR[main]: ...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: attempt to index global 'default' (a nil value)
+20:38:40: ERROR[main]: stack traceback:
+20:38:40: ERROR[main]: 	...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: in main chunk
+20:38:40: ERROR[main]: ======= END OF ERROR FROM LUA ========
+20:38:40: ERROR[main]: Server: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:38:40: ERROR[main]: ModError: ModError: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:39:35: ERROR[main]: ========== ERROR FROM LUA ===========
+20:39:35: ERROR[main]: Failed to load and run script from 
+20:39:35: ERROR[main]: /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:
+20:39:35: ERROR[main]: ...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: attempt to index global 'default' (a nil value)
+20:39:35: ERROR[main]: stack traceback:
+20:39:35: ERROR[main]: 	...me/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua:45: in main chunk
+20:39:35: ERROR[main]: ======= END OF ERROR FROM LUA ========
+20:39:35: ERROR[main]: Server: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:39:35: ERROR[main]: ModError: ModError: Failed to load and run /home/nige/MINETEST/MINETEST/bin/../mods/spell/init.lua
+20:41:23: ACTION[main]:         .__               __                   __   
+20:41:23: ACTION[main]:   _____ |__| ____   _____/  |_  ____   _______/  |_ 
+20:41:23: ACTION[main]:  /     \|  |/    \_/ __ \   __\/ __ \ /  ___/\   __\
+20:41:23: ACTION[main]: |  Y Y  \  |   |  \  ___/|  | \  ___/ \___ \  |  |  
+20:41:23: ACTION[main]: |__|_|  /__|___|  /\___  >__|  \___  >____  > |__|  
+20:41:23: ACTION[main]:       \/        \/     \/          \/     \/        
+20:41:23: ACTION[main]: World at [/home/nige/MINETEST/MINETEST/bin/../worlds/Zonk]
+20:41:23: ACTION[main]: Server for gameid="minetest" listening on 0.0.0.0:51401.
+Unified Inventory. inventory size: 223
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_a.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_a.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_c.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_c.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_b.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_b.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_e.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_e.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_d.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_d.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_g.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_g.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_f.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_f.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_i.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_i.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_h.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_h.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_k.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_k.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_j.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_j.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_m.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_m.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_l.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_l.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_o.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_o.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_n.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_n.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_q.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_q.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_p.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_p.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_s.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_s.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_r.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_r.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_u.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_u.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_t.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_t.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_w.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_w.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_v.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_v.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_y.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_y.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_x.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_x.png"
+20:41:24: ERROR[main]: generateImage(): Could not load image "spell_z.png" while building texture
+20:41:24: ERROR[main]: generateImage(): Creating a dummy image for "spell_z.png"
+20:41:24: ACTION[ServerThread]: singleplayer [127.0.0.1] joins game. 
+20:41:24: ACTION[ServerThread]: singleplayer joins game. List of players: singleplayer
+Irrlicht log: Could not load texture: 
+Irrlicht log: Could not load texture: 
+Irrlicht log: Could not load texture: 
+Irrlicht log: Could not load texture: 
+Font size: 8 16
+Irrlicht log: Could not open file of texture: character.png
+Loaded: Spelling Mod +++++++++
+20:44:32: ACTION[main]:         .__               __                   __   
+20:44:32: ACTION[main]:   _____ |__| ____   _____/  |_  ____   _______/  |_ 
+20:44:32: ACTION[main]:  /     \|  |/    \_/ __ \   __\/ __ \ /  ___/\   __\
+20:44:32: ACTION[main]: |  Y Y  \  |   |  \  ___/|  | \  ___/ \___ \  |  |  
+20:44:32: ACTION[main]: |__|_|  /__|___|  /\___  >__|  \___  >____  > |__|  
+20:44:32: ACTION[main]:       \/        \/     \/          \/     \/        
+20:44:32: ACTION[main]: World at [/home/nige/MINETEST/MINETEST/bin/../worlds/Zonk]
+20:44:32: ACTION[main]: Server for gameid="minetest" listening on 0.0.0.0:54805.
+Unified Inventory. inventory size: 222
+Irrlicht log: Could not load texture: 
+Irrlicht log: Could not load texture: 
+Irrlicht log: Could not load texture: 
+Irrlicht log: Could not load texture: 
+20:44:35: ACTION[ServerThread]: singleplayer [127.0.0.1] joins game. 
+20:44:35: ACTION[ServerThread]: singleplayer joins game. List of players: singleplayer
+Font size: 8 16
+Irrlicht log: Could not open file of texture: character.png
+Loaded: Spelling Mod +++++++++
+20:45:50: ACTION[ServerThread]: singleplayer places node spell:A at (-39,21,-114)
+20:45:57: ACTION[ServerThread]: singleplayer places node spell:B at (-41,21,-114)
+20:46:00: ACTION[ServerThread]: singleplayer places node spell:C at (-43,21,-114)
+20:46:06: ACTION[ServerThread]: singleplayer places node spell:C at (-45,21,-114)
+20:46:09: ACTION[ServerThread]: singleplayer digs spell:C at (-45,21,-114)
+20:46:12: ACTION[ServerThread]: singleplayer places node spell:D at (-45,21,-114)
+20:46:16: ACTION[ServerThread]: singleplayer places node spell:E at (-47,21,-113)
+20:46:20: ACTION[ServerThread]: singleplayer places node spell:F at (-47,21,-111)
+20:46:24: ACTION[ServerThread]: singleplayer digs flowers:tulip at (-47,21,-109)
+20:46:25: ACTION[ServerThread]: singleplayer places node spell:G at (-47,21,-109)
+20:46:29: ACTION[ServerThread]: singleplayer places node spell:H at (-47,21,-107)
+20:48:17: ACTION[ServerThread]: singleplayer places node spell:Y at (-42,21,-111)
+20:48:45: ACTION[ServerThread]: singleplayer places node spell:E at (-42,22,-111)
+20:49:10: ACTION[ServerThread]: singleplayer digs spell:E at (-42,22,-111)
+20:49:12: ACTION[ServerThread]: singleplayer digs spell:Y at (-42,21,-111)
+20:49:12: ACTION[ServerThread]: singleplayer digs default:dirt_with_grass at (-42,20,-113)
