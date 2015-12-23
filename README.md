@@ -1,3 +1,3 @@
 # Spell
 
-Letter blocks & signs mod
+Letter blocks & signs for Elektra's Creative Server
