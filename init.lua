@@ -102,3 +102,23 @@ end
 		groups = {cracky=3, choppy=3},
 		sounds = default.node_sound_stone_defaults(),
 	})
+	minetest.register_node(modname.."elektra", {
+        description="Elektra",
+        drawtype = "nodebox",
+        node_box = {
+            type = "wallmounted",
+            wall_top    = {-0.4875, 0.4875, -0.4875, 0.4875, 0.5, 0.4875},
+            wall_bottom = {-0.4875, -0.5, -0.4875, 0.4875, -0.4875, 0.4875},
+            wall_side   = {-0.5, -0.4875, -0.4875, -0.4875, 0.4875, 0.4875},
+        },
+
+    	paramtype = "light",
+    	paramtype2 = "wallmounted",
+        wield_image = "nyje_elektra.png",
+        sunlight_propagates = true,
+        tiles = { "nyje_elektra.png" },
+		light_source = 14,
+        inventory_image = "nyje_elektra.png",
+		groups = {cracky=3, choppy=3},
+		sounds = default.node_sound_stone_defaults(),
+	})
