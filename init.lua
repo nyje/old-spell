@@ -1,5 +1,15 @@
-modname = "spell:"
-characters = {
+-- spell  server management & toys
+-- Created for Elektra's Creative Server
+-- Contains code derived from "Jail Mod" By kaeza and RAPHAEL (mostly kaeza)
+-- Extended by Nigel Garnett starting 2015-08-21
+-- license: see license.txt
+
+
+--------------------------------------------------------
+--    local variables
+
+local modname = "spell:"
+local characters = {
 	_A = {name="A", letter=1 },
     _B = {name="B", letter=1 },
     _C = {name="C", letter=1 },
@@ -37,6 +47,155 @@ characters = {
     _8 = {name="8" },
     _9 = {name="9" }
 }
+local spawn = {x = -7, y = 5, z = -1256}
+local jail_data = {}
+
+local players_in_jail = { };
+
+--------------------------------------------------------
+--    local functions
+
+local function table_empty(tab)
+	for key in pairs(tab) do return false end
+	return true
+end
+
+local function save_data ()
+	if table_empty(jail_data) then
+        return
+    end
+	local data = minetest.serialize( jail_data )
+	local path = minetest.get_worldpath().."/jail.data"
+	local file = io.open( path, "w" )
+	if( file ) then
+		file:write( data )
+		file:close()
+		return true
+	else return nil
+	end
+end
+
+local function load_data ()
+	local path = minetest.get_worldpath().."/jail.data"
+	local file = io.open( path, "r" )
+	if( file ) then
+		local data = file:read("*all")
+		jail_data = minetest.deserialize( data )
+		file:close()
+		if table_empty(jail_data) then
+            os.remove(path)
+        end
+	return true
+	else return nil
+	end
+end
+
+-- Jail Handler
+local function do_teleport ( )
+    for name, player in pairs(players_in_jail) do
+            player:setpos(jail.jail_data.jailpos)
+    end
+    minetest.after(15, do_teleport)
+end
+minetest.after(15, do_teleport)
+
+
+if not load_data() then
+    jail_data.jailpos = { x = 2008, y = 809, z = 1978 }
+    jail_data.releasepos = { x = 143, y = 6, z = 56 }
+end
+
+------------------------------------------------------
+-- Register stuff with the game engine
+
+-- Set a nice hud size
+minetest.register_on_joinplayer(function(player)
+    minetest.after(0, player.hud_set_hotbar_itemcount, player, 16)
+end)
+
+-- Privs
+minetest.register_privilege("jail", { description = "Allows one to send/release prisoners" })
+minetest.register_privilege("setjail", { description = "Allows one to set the jail position and the release position" })
+--minetest.register_privilege("setspawn", { description = "Allows one to set the spawn position." })
+
+
+
+
+
+minetest.register_chatcommand("setjail", {
+    description = "Set the position of the Jail to where you are now. by Nigel for Sasha5.",
+	privs = {setjail=true},
+    func = function ( name, param )
+        jail_data.jailpos = minetest.get_player_by_name(name):getpos()
+        save_data()
+        return true, "Jail position set."
+    end,
+})
+
+minetest.register_chatcommand("setrelease", {
+    description = "Set the release position to where you are now. by Nigel for Sasha5.",
+	privs = {setjail=true},
+    func = function ( name, param )
+        jail_data.releasepos = minetest.get_player_by_name(name):getpos()
+        save_data()
+        return true, "Release position Set."
+    end,
+})
+
+minetest.register_chatcommand("jail", {
+    params = "<player>",
+    description = "Sends a player to Jail",
+	privs = {jail=true},
+    func = function ( name, param )
+        local player = minetest.get_player_by_name(param)
+        if (player) then
+            players_in_jail[param] = player;
+            player:setpos(jail_data.jailpos)
+			minetest.chat_send_player(param, "You have been sent to jail")
+			minetest.chat_send_all(""..param.." has been sent to jail by "..name.."")
+        end
+    end,
+})
+
+minetest.register_chatcommand("release", {
+    params = "<player>",
+    description = "Releases a player from Jail",
+	privs = {jail=true},
+    func = function ( name, param )
+        if (param == "") then return end
+        local player = minetest.get_player_by_name(param)
+        players_in_jail[param] = nil;
+        if (player) then
+            player:setpos(jail_data.releasepos)
+			minetest.chat_send_player(param, "You have been released from jail")
+			minetest.chat_send_all(""..param.." has been released from jail by "..name.."")
+        end
+    end,
+})
+
+minetest.register_chatcommand("spawn", {
+    description = "Teleport player to spawn point.",
+    func = function ( name, param )
+        local player = minetest.get_player_by_name(name)
+        minetest.chat_send_player(player:get_player_name(), "Teleporting to spawn...")
+        player:setpos(spawn)
+        return true
+    end,
+})
+
+minetest.register_chatcommand("afk", {
+    description = "Tell everyone you are afk.",
+    func = function ( name, param )
+        local player = minetest.get_player_by_name(name)
+        minetest.chat_send_all(name.." is AFK! ")
+        return true
+    end,
+})
+
+
+
+----------------------------------------------------------
+-- Register Nodes
 
 for key,value in pairs(characters) do
     if value.letter then
@@ -122,3 +281,96 @@ end
 		groups = {cracky=3, choppy=3},
 		sounds = default.node_sound_stone_defaults(),
 	})
+
+
+
+
+-------------------------------------------------------------------
+-- alias away old mod stuff to keep the map tidy
+
+minetest.register_alias("stargate:gatenode1", "air")
+minetest.register_alias("stargate:gatenode2", "air")
+minetest.register_alias("stargate:gatenode3", "air")
+minetest.register_alias("stargate:gatenode4", "air")
+minetest.register_alias("stargate:gatenode5", "air")
+minetest.register_alias("stargate:gatenode6", "air")
+minetest.register_alias("stargate:gatenode7", "air")
+minetest.register_alias("stargate:gatenode8", "air")
+minetest.register_alias("stargate:gatenode9", "air")
+minetest.register_alias("stargate:gatenode1_off", "air")
+minetest.register_alias("stargate:gatenode2_off", "air")
+minetest.register_alias("stargate:gatenode3_off", "air")
+minetest.register_alias("stargate:gatenode4_off", "air")
+minetest.register_alias("stargate:gatenode5_off", "air")
+minetest.register_alias("stargate:gatenode6_off", "air")
+minetest.register_alias("stargate:gatenode7_off", "air")
+minetest.register_alias("stargate:gatenode8_off", "air")
+minetest.register_alias("stargate:gatenode9_off", "air")
+--minetest.register_alias("mobs:egg", "air")
+minetest.register_alias("wardrobe:wardrobe", "air")
+
+
+
+-------------------------------------------------------------------
+-- END OF LIVE CODE SECTION
+-------------------------------------------------------------------
+
+
+-------------------------------------------------------------------
+-- Disabled & held code only after this
+
+-- minetest.register_alias("wardenpick", "jail:pick_warden")
+--
+-- minetest.register_node("jail:jailwall", {
+-- 	description = "Unbreakable Jail Wall",
+-- 	tile_images = {"jail_wall.png"},
+-- 	is_ground_content = true,
+-- 	groups = {unbreakable=1},
+-- --	sounds = default.node_sound_stone_defaults(),
+-- })
+--
+-- minetest.register_node("jail:glass", {
+-- 	description = "Unbreakable Jail Glass",
+-- 	drawtype = "glasslike",
+-- 	tile_images = {"jail_glass.png"},
+-- 	paramtype = "light",
+-- 	sunlight_propagates = true,
+-- 	is_ground_content = true,
+-- 	groups = {unbreakable=1},
+-- --	sounds = default.node_sound_glass_defaults(),
+-- })
+--
+-- minetest.register_node("jail:ironbars", {
+-- 	drawtype = "fencelike",
+-- 	tiles = {"jail_ironbars.png"},
+-- 	inventory_image = "jail_ironbars.png",
+-- 	light_propagates = true,
+-- 	paramtype = "light",
+-- 	is_ground_content = true,
+-- 	selection_box = {
+-- 		type = "fixed",
+-- 		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
+-- 	},
+-- 	groups = {unbreakable=1},
+-- --	sounds = default.node_sound_stone_defaults(),
+-- })
+--
+-- minetest.register_tool("jail:pick_warden", {
+-- 	description = "Warden Pickaxe",
+-- 	inventory_image = "jail_wardenpick.png",
+-- 	tool_capabilities = {
+-- 		full_punch_interval = 0,
+-- 		max_drop_level=3,
+-- 		groupcaps={
+-- 			unbreakable={times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+-- 			fleshy = {times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+-- 			choppy={times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+-- 			bendy={times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+-- 			cracky={times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+-- 			crumbly={times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+-- 			snappy={times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+-- 		}
+-- 	},
+-- })
+
+
