@@ -10,42 +10,42 @@
 
 local modname = "spell:"
 local characters = {
-	_A = {name="A", letter=1 },
-    _B = {name="B", letter=1 },
-    _C = {name="C", letter=1 },
-    _D = {name="D", letter=1 },
-    _E = {name="E", letter=1 },
-    _F = {name="F", letter=1 },
-    _G = {name="G", letter=1 },
-    _H = {name="H", letter=1 },
-    _I = {name="I", letter=1 },
-    _J = {name="J", letter=1 },
-    _K = {name="K", letter=1 },
-    _L = {name="L", letter=1 },
-    _M = {name="M", letter=1 },
-    _N = {name="N", letter=1 },
-    _O = {name="O", letter=1 },
-    _P = {name="P", letter=1 },
-    _Q = {name="Q", letter=1 },
-    _R = {name="R", letter=1 },
-    _S = {name="S", letter=1 },
-    _T = {name="T", letter=1 },
-    _U = {name="U", letter=1 },
-    _V = {name="V", letter=1 },
-    _W = {name="W", letter=1 },
-    _X = {name="X", letter=1 },
-    _Y = {name="Y", letter=1 },
-    _Z = {name="Z", letter=1 },
-    _0 = {name="0" },
-    _1 = {name="1" },
-    _2 = {name="2" },
-    _3 = {name="3" },
-    _4 = {name="4" },
-    _5 = {name="5" },
-    _6 = {name="6" },
-    _7 = {name="7" },
-    _8 = {name="8" },
-    _9 = {name="9" }
+    A = 1,
+    B = 1,
+    C = 1,
+    D = 1,
+    E = 1,
+    F = 1,
+    G = 1,
+    H = 1,
+    I = 1,
+    J = 1,
+    K = 1,
+    L = 1,
+    M = 1,
+    N = 1,
+    O = 1,
+    P = 1,
+    Q = 1,
+    R = 1,
+    S = 1,
+    T = 1,
+    U = 1,
+    V = 1,
+    W = 1,
+    X = 1,
+    Y = 1,
+    Z = 1,
+    [0] = 0,
+    [1] = 0,
+    [2] = 0,
+    [3] = 0,
+    [4] = 0,
+    [5] = 0,
+    [6] = 0,
+    [7] = 0,
+    [8] = 0,
+    [9] = 0
 }
 local spawn = {x = -7, y = 5, z = -1256}
 local jail_data = {}
@@ -198,9 +198,9 @@ minetest.register_chatcommand("afk", {
 -- Register Nodes
 
 for key,value in pairs(characters) do
-    if value.letter then
-        my_desc = "Letter"..key
-        minetest.register_node(modname.."Sign"..key, {
+    if value==1 then
+        my_desc = "Letter_"..key
+        minetest.register_node(modname.."Sign_"..key, {
             description="Sign "..my_desc,
             drawtype = "nodebox",
             node_box = {
@@ -213,20 +213,20 @@ for key,value in pairs(characters) do
             paramtype2 = "wallmounted",
             sunlight_propagates = true,
             light_source = 14,
-            inventory_image = "sign"..key..".png",
-            wield_image = "sign"..key..".png",
-            tiles = { "sign"..key..".png" },
+            inventory_image = "sign_"..key..".png",
+            wield_image = "sign_"..key..".png",
+            tiles = { "sign_"..key..".png" },
             groups = {cracky=1, choppy=1},
             sounds = default.node_sound_wood_defaults(),
         })
     else
-        my_desc = "Number"..key
+        my_desc = "Number_"..key
     end
-	minetest.register_node(modname.."Letter"..key, {
+	minetest.register_node(modname.."Letter_"..key, {
         description="Block"..my_desc,
-		tiles = { "spell"..key..".png" },
+		tiles = { "spell_"..key..".png" },
 		light_source = 14,
-        inventory_image = "spell"..key..".png",
+        inventory_image = "spell_"..key..".png",
 		groups = {cracky=3, choppy=3},
 		sounds = default.node_sound_stone_defaults(),
 	})
