@@ -5,176 +5,37 @@
 -- license: see license.txt
 
 
+
 --------------------------------------------------------
 --    local variables
 
 local modname = "spell:"
-local characters = {
-    A = 1,
-    B = 1,
-    C = 1,
-    D = 1,
-    E = 1,
-    F = 1,
-    G = 1,
-    H = 1,
-    I = 1,
-    J = 1,
-    K = 1,
-    L = 1,
-    M = 1,
-    N = 1,
-    O = 1,
-    P = 1,
-    Q = 1,
-    R = 1,
-    S = 1,
-    T = 1,
-    U = 1,
-    V = 1,
-    W = 1,
-    X = 1,
-    Y = 1,
-    Z = 1,
-    [0] = 0,
-    [1] = 0,
-    [2] = 0,
-    [3] = 0,
-    [4] = 0,
-    [5] = 0,
-    [6] = 0,
-    [7] = 0,
-    [8] = 0,
-    [9] = 0
-}
-local spawn = {x = -7, y = 5, z = -1256}
-local jail_data = {}
-
-local players_in_jail = { };
+local spawn = {x = -3, y =11, z = -3}
+local path = minetest.get_modpath("spell")
 
 --------------------------------------------------------
---    local functions
+--    call the rest...
 
-local function table_empty(tab)
-	for key in pairs(tab) do return false end
-	return true
-end
-
-local function save_data ()
-	if table_empty(jail_data) then
-        return
-    end
-	local data = minetest.serialize( jail_data )
-	local path = minetest.get_worldpath().."/jail.data"
-	local file = io.open( path, "w" )
-	if( file ) then
-		file:write( data )
-		file:close()
-		return true
-	else return nil
-	end
-end
-
-local function load_data ()
-	local path = minetest.get_worldpath().."/jail.data"
-	local file = io.open( path, "r" )
-	if( file ) then
-		local data = file:read("*all")
-		jail_data = minetest.deserialize( data )
-		file:close()
-		if table_empty(jail_data) then
-            os.remove(path)
-        end
-	return true
-	else return nil
-	end
-end
-
--- Jail Handler
-local function do_teleport ( )
-    for name, player in pairs(players_in_jail) do
-            player:setpos(jail.jail_data.jailpos)
-    end
-    minetest.after(15, do_teleport)
-end
-minetest.after(15, do_teleport)
-
-
-if not load_data() then
-    jail_data.jailpos = { x = 2008, y = 809, z = 1978 }
-    jail_data.releasepos = { x = 143, y = 6, z = 56 }
-end
+dofile(path .. "/sitlay.lua")
+dofile(path .. "/wierdnodes.lua")
+dofile(path .. "/jail.lua")
+dofile(path .. "/letters.lua")
 
 ------------------------------------------------------
 -- Register stuff with the game engine
+
+--minetest.register_privilege("setspawn", { description = "Allows one to set the spawn position." })
+
 
 -- Set a nice hud size
 minetest.register_on_joinplayer(function(player)
     minetest.after(0, player.hud_set_hotbar_itemcount, player, 16)
 end)
 
--- Privs
-minetest.register_privilege("jail", { description = "Allows one to send/release prisoners" })
-minetest.register_privilege("setjail", { description = "Allows one to set the jail position and the release position" })
---minetest.register_privilege("setspawn", { description = "Allows one to set the spawn position." })
-
-
-
-
-
-minetest.register_chatcommand("setjail", {
-    description = "Set the position of the Jail to where you are now. by Nigel for Sasha5.",
-	privs = {setjail=true},
-    func = function ( name, param )
-        jail_data.jailpos = minetest.get_player_by_name(name):getpos()
-        save_data()
-        return true, "Jail position set."
-    end,
-})
-
-minetest.register_chatcommand("setrelease", {
-    description = "Set the release position to where you are now. by Nigel for Sasha5.",
-	privs = {setjail=true},
-    func = function ( name, param )
-        jail_data.releasepos = minetest.get_player_by_name(name):getpos()
-        save_data()
-        return true, "Release position Set."
-    end,
-})
-
-minetest.register_chatcommand("jail", {
-    params = "<player>",
-    description = "Sends a player to Jail",
-	privs = {jail=true},
-    func = function ( name, param )
-        local player = minetest.get_player_by_name(param)
-        if (player) then
-            players_in_jail[param] = player;
-            player:setpos(jail_data.jailpos)
-			minetest.chat_send_player(param, "You have been sent to jail")
-			minetest.chat_send_all(""..param.." has been sent to jail by "..name.."")
-        end
-    end,
-})
-
-minetest.register_chatcommand("release", {
-    params = "<player>",
-    description = "Releases a player from Jail",
-	privs = {jail=true},
-    func = function ( name, param )
-        if (param == "") then return end
-        local player = minetest.get_player_by_name(param)
-        players_in_jail[param] = nil;
-        if (player) then
-            player:setpos(jail_data.releasepos)
-			minetest.chat_send_player(param, "You have been released from jail")
-			minetest.chat_send_all(""..param.." has been released from jail by "..name.."")
-        end
-    end,
-})
 
 minetest.register_chatcommand("spawn", {
     description = "Teleport player to spawn point.",
+	privs = {interact=true},
     func = function ( name, param )
         local player = minetest.get_player_by_name(name)
         minetest.chat_send_player(player:get_player_name(), "Teleporting to spawn...")
@@ -191,98 +52,6 @@ minetest.register_chatcommand("afk", {
         return true
     end,
 })
-
-
-
-----------------------------------------------------------
--- Register Nodes
-
-for key,value in pairs(characters) do
-    if value==1 then
-        my_desc = "Letter_"..key
-        minetest.register_node(modname.."Sign_"..key, {
-            description="Sign "..my_desc,
-            drawtype = "nodebox",
-            node_box = {
-                type = "wallmounted",
-                wall_top    = {-0.4875, 0.4875, -0.4875, 0.4875, 0.5, 0.4875},
-                wall_bottom = {-0.4875, -0.5, -0.4875, 0.4875, -0.4875, 0.4875},
-                wall_side   = {-0.5, -0.4875, -0.4875, -0.4875, 0.4875, 0.4875},
-            },
-            paramtype = "light",
-            paramtype2 = "wallmounted",
-            sunlight_propagates = true,
-            light_source = 14,
-            inventory_image = "sign_"..key..".png",
-            wield_image = "sign_"..key..".png",
-            tiles = { "sign_"..key..".png" },
-            groups = {cracky=1, choppy=1},
-            sounds = default.node_sound_wood_defaults(),
-        })
-    else
-        my_desc = "Number_"..key
-    end
-	minetest.register_node(modname.."Letter_"..key, {
-        description="Block"..my_desc,
-		tiles = { "spell_"..key..".png" },
-		light_source = 14,
-        inventory_image = "spell_"..key..".png",
-		groups = {cracky=3, choppy=3},
-		sounds = default.node_sound_stone_defaults(),
-	})
-end
-
-	minetest.register_node(modname.."px_logo", {
-        description="planet express logo",
-		tiles = { "PX.png" },
-		light_source = 14,
-        inventory_image = "PX.png",
-		groups = {cracky=3, choppy=3},
-		sounds = default.node_sound_stone_defaults(),
-	})
-
-	minetest.register_node(modname.."nigel", {
-        description="Nigel",
-        drawtype = "nodebox",
-        node_box = {
-            type = "wallmounted",
-            wall_top    = {-0.4875, 0.4875, -0.4875, 0.4875, 0.5, 0.4875},
-            wall_bottom = {-0.4875, -0.5, -0.4875, 0.4875, -0.4875, 0.4875},
-            wall_side   = {-0.5, -0.4875, -0.4875, -0.4875, 0.4875, 0.4875},
-        },
-
-    	paramtype = "light",
-    	paramtype2 = "wallmounted",
-        wield_image = "nyje_nyje.png",
-        sunlight_propagates = true,
-        tiles = { "nyje_nyje.png" },
-		light_source = 14,
-        inventory_image = "nyje_nyje.png",
-		groups = {cracky=3, choppy=3},
-		sounds = default.node_sound_stone_defaults(),
-	})
-	minetest.register_node(modname.."elektra", {
-        description="Elektra",
-        drawtype = "nodebox",
-        node_box = {
-            type = "wallmounted",
-            wall_top    = {-0.4875, 0.4875, -0.4875, 0.4875, 0.5, 0.4875},
-            wall_bottom = {-0.4875, -0.5, -0.4875, 0.4875, -0.4875, 0.4875},
-            wall_side   = {-0.5, -0.4875, -0.4875, -0.4875, 0.4875, 0.4875},
-        },
-
-    	paramtype = "light",
-    	paramtype2 = "wallmounted",
-        wield_image = "nyje_elektra.png",
-        sunlight_propagates = true,
-        tiles = { "nyje_elektra.png" },
-		light_source = 14,
-        inventory_image = "nyje_elektra.png",
-		groups = {cracky=3, choppy=3},
-		sounds = default.node_sound_stone_defaults(),
-	})
-
-
 
 
 -------------------------------------------------------------------
@@ -308,6 +77,10 @@ minetest.register_alias("stargate:gatenode8_off", "air")
 minetest.register_alias("stargate:gatenode9_off", "air")
 --minetest.register_alias("mobs:egg", "air")
 minetest.register_alias("wardrobe:wardrobe", "air")
+--minetest.register_alias("candycane:candy_block", "stone")
+--for i = 1, 15 do
+--	minetest.register_alias("xpanes:pane_"..i, "air")
+--end
 
 
 
@@ -323,7 +96,7 @@ minetest.register_alias("wardrobe:wardrobe", "air")
 --
 -- minetest.register_node("jail:jailwall", {
 -- 	description = "Unbreakable Jail Wall",
--- 	tile_images = {"jail_wall.png"},
+-- 	tiles = {"jail_wall.png"},
 -- 	is_ground_content = true,
 -- 	groups = {unbreakable=1},
 -- --	sounds = default.node_sound_stone_defaults(),
@@ -332,7 +105,7 @@ minetest.register_alias("wardrobe:wardrobe", "air")
 -- minetest.register_node("jail:glass", {
 -- 	description = "Unbreakable Jail Glass",
 -- 	drawtype = "glasslike",
--- 	tile_images = {"jail_glass.png"},
+-- 	tiles = {"jail_glass.png"},
 -- 	paramtype = "light",
 -- 	sunlight_propagates = true,
 -- 	is_ground_content = true,
